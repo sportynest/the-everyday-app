@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSRemindersUsageDescription</key>
+	<string>We need access to your reminders to manage your events in the app.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to provide weather updates for your area.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to provide continuous weather updates.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We need access to your calendar to show events in the app.</string>
+</dict>
+</plist>

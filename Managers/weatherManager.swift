@@ -49,6 +49,7 @@ class WeatherManager: ObservableObject {
         case requestFailed
         case decodingError
         case cancelled
+        
     }
 }
 

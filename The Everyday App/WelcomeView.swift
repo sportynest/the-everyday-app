@@ -12,48 +12,59 @@ import EventKit
 struct WelcomeView: View {
     @EnvironmentObject var locationmanager: LocationManager
     @EnvironmentObject var calendarmanager: CalendarManager
+    @State private var isRequestingLocation = false
+    @State private var navigateToWeather = false
     var body: some View {
-        VStack{
-            VStack(spacing: 10){
-                Image(systemName: "sun.max.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-                    .padding(.top, 20)
+        NavigationStack{
+            VStack{
+                VStack(spacing: 15){
+                    Image(systemName: "sun.max.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .padding(.top, 20)
+                    
+                    Text("Welcome to the Everyday App")
+                        .font(.system(size: UIDevice.current.userInterfaceIdiom == .phone ? 28 : 34))
+                        .bold()
+                    Text("Get started by sharing your location")
+                        .font(.subheadline)
+                }
+                .padding()
+                .multilineTextAlignment(.center)
                 
-                Text("Welcome to the Everyday App")
-                    .font(.title)
-                    .bold()
-                Text("Get started by sharing your location")
-                    .font(.subheadline)
-                    .padding(.bottom, 20)
-                Text("The Everyday App")
-                    .bold()
+                Spacer()
+                LocationButton(.shareCurrentLocation) {
+                    isRequestingLocation = true
+                    locationmanager.requestLocationIfNecessary() // Refactored logic
+                }
+                .cornerRadius(30)
+                .padding()
+                .disabled(isRequestingLocation)
+                
+                if isRequestingLocation {
+                    ProgressView() // Show loading indicator
+                        .padding()
+                }
+                
             }
-            .padding()
-            .multilineTextAlignment(.center)
-            
-            Spacer()
-            LocationButton(.shareCurrentLocation) {
-                print("Location button tapped")
-                print(locationmanager.authorizationStatus)
-                if locationmanager.authorizationStatus == .notDetermined {
-                    print("location is not determined")
-                    locationmanager.requestLocation()
-                    print("requested location")
-                } else {
-                    print("location is not not determined")
-                    locationmanager.checkLocationAuthorization()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
+            .onAppear {
+                locationmanager.checkLocationAuthorization()
+            }
+        }
+        .onReceive(locationmanager.$authorizationStatus) { status in
+            if status == .authorizedWhenInUse || status == .authorizedAlways {
+                navigateToWeather = true
+
+                // Start fetching weather data if needed
+                if let location = locationmanager.location {
+                    // Assuming you have a method to fetch weather (e.g., fetchWeather)
+                    weathermanager.fetchWeather(latitude: location.latitude, longitude: location.longitude)
                 }
             }
-
-            .cornerRadius(30)
-            .padding()
         }
-        .onAppear {
-            locationmanager.checkLocationAuthorization()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         
     }
 }

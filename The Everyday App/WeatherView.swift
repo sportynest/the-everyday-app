@@ -3,7 +3,6 @@
 //  Weather - Cal App
 //
 //  Created by Lekan Soyewo on 2023-10-21.
-//
 import SwiftUI
 import EventKit
 
@@ -23,59 +22,86 @@ let weatherlightbackground = LinearGradient(
     colors: [Color.blue, Color.white],
     startPoint: .top, endPoint: .bottom)
 
+extension Double {
+    var formattedTemperature: String {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 0 // Adjust for desired decimal places
+        if let formattedString = formatter.string(from: self as NSNumber) {
+            return "\(formattedString)°"
+        } else {
+            return "-" // Return a default value in case of errors
+        }
+    }
+}
+
+extension Date {
+    var startOfDay: Date {
+        let calendar = Calendar.current
+        return calendar.startOfDay(for: self)
+    }
+}
+
 struct WeatherView: View {
     var weather: ResponseBody // Updated to use WeatherData
     @EnvironmentObject var calendarmanager: CalendarManager
+    @StateObject private var weatherManager = WeatherManager()
+    @StateObject private var locationManager = LocationManager()
     @State private var calendarEvents: [EKEvent] = []
+    @State private var dailyForecasts: [DailyForecast] = []
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                VStack(alignment: .leading, spacing: 15) {
-                    Text("Hello, Your Name")
-                        .bold()
-                    // Accessing the first weather condition's description
-                    if let weatherDescription = weather.current!.weather?.first?.description {
-                        Text("Weather: \(weatherDescription)")
-                            .bold()
-                    }
-                    else {
-                        Text("Weather data unavailable")
-                            .foregroundColor(.gray)
-                    }
+        ZStack {
+              // Background Gradient
+              LinearGradient(colors: [.teal.opacity(0.3), .cyan.opacity(0.7)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                .ignoresSafeArea(.all)
+
+              VStack(alignment: .leading, spacing: 20) {
+                  HStack(alignment: .top) {
+                      // Custom Weather Icon
+                      Image(systemName: "sun.max.fill")
+                          .font(.system(size: 50))
+                          .foregroundColor(.yellow)
+                      
+                      Spacer()
+                      
+                      VStack(alignment: .trailing) {
+                          Text("Hello, Your Name")
+                              .bold()
+                              .font(.title2)
+                          
+                          Text(weather.current?.weather?.first?.description?.capitalized ?? "Weather data unavailable")
+                              .foregroundColor(.gray)
+                          
+                          
+                          ForEach(dailyForecasts, id: \.id) { forecast in
+                              DailyWeatherCard(forecast: forecast) // Create a DailyWeatherCard view
+                          }
+                          
+                          Spacer()
+                          
+                          NavigationLink {
+                              CalendarView(events: calendarEvents) // Pass fetched events
+                          } label: {
+                              Text("Calendar")
+                                  .bold()
+                                  .foregroundColor(.white)
+                                  .padding()
+                                  .background(Color.blue)
+                                  .cornerRadius(10)
+                          }
+                      }
+                      .padding()
+                      .foregroundColor(.white) // Text color contrast
+                  }
                 }
-                .padding(EdgeInsets(top: 10, leading: 10, bottom: 15, trailing: 10))
-                .preferredColorScheme(.dark)
-                Spacer()
+
+                
             }
-            .background(backgroundGradient)
-            .cornerRadius(20)
-            .frame(maxWidth: .infinity)
-            
-            LazyVStack(alignment: .leading, spacing: 15) {
-                Text("dv sd")
-                ForEach(calendarEvents, id: \.eventIdentifier) { event in
-                    Text(event.title)
-                }
-                Spacer()
-            }
-            .preferredColorScheme(.dark)
-            .background(Color.black)
-            .cornerRadius(0)
-            .navigationTitle("Calendar")
-            .onAppear() {
-                fetchCalendarEvents(value: 1)
-            }
-            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-            
-            Spacer()
-        }
-        .padding(EdgeInsets(top: 25, leading: 20, bottom: 25, trailing: 20))
-        .frame(maxHeight: .infinity)
-        .background(weatherlightbackground)
-        .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
-        .onAppear(){
-            fetchCalendarEvents(value: 1)
+        .task { // Use .task modifier for data fetching on view appearance
+                        await fetchWeatherAndCalendarData()
+                    }
+        .onAppear {
+            fetchCalendarEvents(value: 1) // Example: Fetch events for the next day
         }
     }
     
@@ -87,6 +113,59 @@ struct WeatherView: View {
             }
         }
     }
+    
+    private func fetchWeatherAndCalendarData() async{
+        // ... your existing weather fetching logic ...
+
+        do {
+            let weatherResponse = try await weatherManager.getCurrentWeather(latitude: locationManager.location?.latitude ?? 0, longitude: locationManager.location?.longitude ?? 0) // Update here
+
+
+            calendarmanager.requestAccessAndFetchEvents(value: 7) { events in
+                let groupedEvents = Dictionary(grouping: events!) { $0.startDate.startOfDay } // Group by date
+
+                        // Assuming you fetch daily weather data
+                        var forecasts: [DailyForecast] = []
+                        for dailyWeather in weatherResponse.daily ?? [] {
+                            let date = Date(timeIntervalSince1970: TimeInterval(dailyWeather.dt ?? 0))
+                            let eventsForDate = groupedEvents[date] ?? []
+                            forecasts.append(DailyForecast(date: date, weather: dailyWeather, events: eventsForDate))
+                        }
+
+                        DispatchQueue.main.async {
+                            self.dailyForecasts = forecasts
+                        }
+                    }
+        } catch {
+            // Handle fetching errors appropriately.
+            print("Error fetching weather or calendar data: \(error)")
+        }
+    }
+
+    
+}
+
+struct DailyWeatherCard: View {
+    let forecast: DailyForecast
+
+    var body: some View {
+        VStack {
+            Text(forecast.date.formatted(date: .abbreviated, time: .omitted))
+            // Display weather: icon, temp ...
+            
+            if !forecast.events.isEmpty {
+                Text("Events:")
+                // Create neat views for each event
+            }
+        }
+    }
+}
+
+struct DailyForecast: Identifiable {
+  let id = UUID()
+  let date: Date
+  let weather: ResponseBody.DailyWeather // Use DailyWeather here
+  let events: [EKEvent]
 }
 
 struct WeatherView_Previews: PreviewProvider {
@@ -98,3 +177,4 @@ struct WeatherView_Previews: PreviewProvider {
             .environmentObject(CalendarManager())
     }
 }
+

@@ -7,36 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA0D41312BCB47590074432E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0D41302BCB47590074432E /* ContentView.swift */; };
+		EA0D41332BCB48C80074432E /* AppErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0D41322BCB48C80074432E /* AppErrors.swift */; };
+		EA0D41372BCB4ECE0074432E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA0D41362BCB4ECE0074432E /* Assets.xcassets */; };
+		EA0D413B2BCB54F20074432E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0D413A2BCB54F20074432E /* CalendarView.swift */; };
 		EA9466AF2B0AF8500026E4B6 /* The_Everyday_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466AE2B0AF8500026E4B6 /* The_Everyday_AppApp.swift */; };
 		EA9466BE2B0AF97A0026E4B6 /* calendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466BD2B0AF97A0026E4B6 /* calendarManager.swift */; };
 		EA9466C12B0AF9920026E4B6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466BF2B0AF9920026E4B6 /* LocationManager.swift */; };
 		EA9466C22B0AF9920026E4B6 /* weatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466C02B0AF9920026E4B6 /* weatherManager.swift */; };
 		EA9466C72B0AF9BF0026E4B6 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466C32B0AF9BF0026E4B6 /* WeatherView.swift */; };
-		EA9466C82B0AF9BF0026E4B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466C42B0AF9BF0026E4B6 /* ContentView.swift */; };
 		EA9466C92B0AF9BF0026E4B6 /* loadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466C52B0AF9BF0026E4B6 /* loadingView.swift */; };
 		EA9466CA2B0AF9BF0026E4B6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466C62B0AF9BF0026E4B6 /* WelcomeView.swift */; };
 		EA9466CC2B0AFA240026E4B6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466CB2B0AFA240026E4B6 /* extensions.swift */; };
 		EA9466D02B0AFA870026E4B6 /* weatherData.json in Resources */ = {isa = PBXBuildFile; fileRef = EA9466CD2B0AFA870026E4B6 /* weatherData.json */; };
 		EA9466D12B0AFA870026E4B6 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9466CE2B0AFA870026E4B6 /* ModelData.swift */; };
 		EA9466D22B0AFA870026E4B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA9466CF2B0AFA870026E4B6 /* Preview Assets.xcassets */; };
-		EA9466D42B0AFAA50026E4B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA9466D32B0AFAA50026E4B6 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA0D41302BCB47590074432E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EA0D41322BCB48C80074432E /* AppErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrors.swift; sourceTree = "<group>"; };
+		EA0D41362BCB4ECE0074432E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA0D413A2BCB54F20074432E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		EA9466AB2B0AF8500026E4B6 /* The Everyday App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Everyday App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9466AE2B0AF8500026E4B6 /* The_Everyday_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Everyday_AppApp.swift; sourceTree = "<group>"; };
 		EA9466BD2B0AF97A0026E4B6 /* calendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarManager.swift; sourceTree = "<group>"; };
 		EA9466BF2B0AF9920026E4B6 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EA9466C02B0AF9920026E4B6 /* weatherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weatherManager.swift; sourceTree = "<group>"; };
 		EA9466C32B0AF9BF0026E4B6 /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
-		EA9466C42B0AF9BF0026E4B6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "../../../../../../Desktop/Weather - Cal App/Views/ContentView.swift"; sourceTree = "<group>"; };
 		EA9466C52B0AF9BF0026E4B6 /* loadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loadingView.swift; sourceTree = "<group>"; };
 		EA9466C62B0AF9BF0026E4B6 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		EA9466CB2B0AFA240026E4B6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		EA9466CD2B0AFA870026E4B6 /* weatherData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherData.json; sourceTree = "<group>"; };
 		EA9466CE2B0AFA870026E4B6 /* ModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		EA9466CF2B0AFA870026E4B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Preview Assets.xcassets"; path = "../../../../../../../Desktop/Weather - Cal App/Weather - Cal/Preview Content/Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EA9466D32B0AFAA50026E4B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../../../Desktop/Weather - Cal App/Weather - Cal/Assets.xcassets"; sourceTree = "<group>"; };
 		EA9A3B932B2AC0D500FDA44A /* The-Everyday-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "The-Everyday-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -54,6 +58,7 @@
 		EA9466A22B0AF8500026E4B6 = {
 			isa = PBXGroup;
 			children = (
+				EA0D41322BCB48C80074432E /* AppErrors.swift */,
 				EA9466CB2B0AFA240026E4B6 /* extensions.swift */,
 				EA9466BC2B0AF8FF0026E4B6 /* Managers */,
 				EA9466AD2B0AF8500026E4B6 /* The Everyday App */,
@@ -73,13 +78,14 @@
 			isa = PBXGroup;
 			children = (
 				EA9A3B932B2AC0D500FDA44A /* The-Everyday-App-Info.plist */,
-				EA9466C42B0AF9BF0026E4B6 /* ContentView.swift */,
+				EA0D41302BCB47590074432E /* ContentView.swift */,
+				EA0D413A2BCB54F20074432E /* CalendarView.swift */,
 				EA9466C52B0AF9BF0026E4B6 /* loadingView.swift */,
 				EA9466C32B0AF9BF0026E4B6 /* WeatherView.swift */,
 				EA9466C62B0AF9BF0026E4B6 /* WelcomeView.swift */,
 				EA9466AE2B0AF8500026E4B6 /* The_Everyday_AppApp.swift */,
-				EA9466D32B0AFAA50026E4B6 /* Assets.xcassets */,
 				EA9466B42B0AF8520026E4B6 /* Preview Content */,
+				EA0D41362BCB4ECE0074432E /* Assets.xcassets */,
 			);
 			path = "The Everyday App";
 			sourceTree = "<group>";
@@ -163,8 +169,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA9466D22B0AFA870026E4B6 /* Preview Assets.xcassets in Resources */,
+				EA0D41372BCB4ECE0074432E /* Assets.xcassets in Resources */,
 				EA9466D02B0AFA870026E4B6 /* weatherData.json in Resources */,
-				EA9466D42B0AFAA50026E4B6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,11 +183,13 @@
 			files = (
 				EA9466C12B0AF9920026E4B6 /* LocationManager.swift in Sources */,
 				EA9466C22B0AF9920026E4B6 /* weatherManager.swift in Sources */,
-				EA9466C82B0AF9BF0026E4B6 /* ContentView.swift in Sources */,
+				EA0D413B2BCB54F20074432E /* CalendarView.swift in Sources */,
 				EA9466CA2B0AF9BF0026E4B6 /* WelcomeView.swift in Sources */,
+				EA0D41332BCB48C80074432E /* AppErrors.swift in Sources */,
 				EA9466C72B0AF9BF0026E4B6 /* WeatherView.swift in Sources */,
 				EA9466CC2B0AFA240026E4B6 /* extensions.swift in Sources */,
 				EA9466C92B0AF9BF0026E4B6 /* loadingView.swift in Sources */,
+				EA0D41312BCB47590074432E /* ContentView.swift in Sources */,
 				EA9466D12B0AFA870026E4B6 /* ModelData.swift in Sources */,
 				EA9466AF2B0AF8500026E4B6 /* The_Everyday_AppApp.swift in Sources */,
 				EA9466BE2B0AF97A0026E4B6 /* calendarManager.swift in Sources */,

@@ -4,6 +4,7 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     
+    @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
     @Published var location: CLLocationCoordinate2D?
     @Published var isLoading = false
     @Published var locationUpdated = false
@@ -33,6 +34,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = manager.authorizationStatus
             switch manager.authorizationStatus {
                 case .notDetermined:
                     requestLocation() // Requests authorization when not determined
@@ -60,7 +62,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 }
     }
     
-    var authorizationStatus: CLAuthorizationStatus {
+    func requestLocationIfNecessary() {
+        switch authorizationStatus {
+        case .notDetermined:
+            requestLocation()
+        case .authorizedWhenInUse, .authorizedAlways: break
+            // Handle if you later need the fetched location
+        default: break
+            // Handle other auth states, maybe show an error
+        }
+    }
+    
+    var getauthorizationStatus: CLAuthorizationStatus {
             return manager.authorizationStatus
         }
 
